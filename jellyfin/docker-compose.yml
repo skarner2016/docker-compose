@@ -1,0 +1,24 @@
+networks:
+    app:
+        external: true
+services:
+    jellyfin:
+        container_name: jellyfin
+        deploy:
+            resources:
+                limits:
+                    cpus: "0"
+                    memory: "0"
+        image: jellyfin/jellyfin:10.10.7
+        labels:
+            createdBy: Apps
+        networks:
+            - app
+        ports:
+            - 8096:8096
+        restart: always
+        volumes:
+            - ./data/config:/config
+            - ./data/cache:/cache
+            # - /vol2/downloads/qb:/media/media
+            - ~/workspace/data/qb:/media/media
