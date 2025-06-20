@@ -20,5 +20,5 @@ services:
         volumes:
             - ./data/config:/config
             - ./data/cache:/cache
-            # - /vol2/downloads/qb:/media/media
-            - ~/workspace/data/qb:/media/media
+            - /vol2/downloads/qb:/media/media
+            # - ~/workspace/data/qb:/media/media
