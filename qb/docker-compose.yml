@@ -28,5 +28,4 @@ services:
         restart: always
         volumes:
             - ./config:/config
-            # - /vol2/downloads/qb:/downloads
-            - ~/workspace/data/qb:/downloads
+            - /vol2/downloads/qb:/downloads
