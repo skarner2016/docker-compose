@@ -3,34 +3,26 @@ networks:
         external: true
 services:
   beszel:
+    image: henrygd/beszel:latest
     container_name: beszel
-    deploy:
-      resources:
-        limits:
-          cpus: "0"
-          memory: "0"
-    image: henrygd/beszel:0.11.1
-    labels:
-      createdBy: Apps
+    restart: always
     networks:
       - app
     ports:
       - 8090:8090
-    restart: always
-    depends_on:
-      - beszel-agent
     volumes:
-      - ./data/data:/beszel_data
-      - ./data/socket:/beszel_socket
+      - ./beszel_data:/beszel_data
+      - ./beszel_socket:/beszel_socket
+
   beszel-agent:
     image: henrygd/beszel-agent:latest
     container_name: beszel-agent
     restart: always
     network_mode: host
     volumes:
-      - ./data/socket:/beszel_socket
+      - ./beszel_socket:/beszel_socket
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       LISTEN: /beszel_socket/beszel.sock
       # 请勿删除密钥周围的引号
-      KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdohWMHxRPky+b4mM+Do6CgQVRfUIho2DLGG40aji9X'
+      KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN4J32V6YULnxKmD5Y9Bxcsh4DjIOJiUqCe+Tb4W+dLM'
