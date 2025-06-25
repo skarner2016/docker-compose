@@ -8,6 +8,7 @@ services:
     container_name: sun-panel
     volumes:
       - ./conf:/app/conf
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 3002:3002
     restart: always
